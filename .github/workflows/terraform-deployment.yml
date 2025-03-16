@@ -4,7 +4,7 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+  
 jobs:
   terraform:
     name: "Terraform"
@@ -38,11 +38,6 @@ jobs:
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
 
-      - name: "Capture Terraform Output"
-        run: |
-          echo "TF_PLAN_OUTPUT=$(terraform output -json)" >> $GITHUB_ENV
-        id: capture_output
-
       - name: "Terraform Apply"
         id: apply
         run: terraform apply -auto-approve
@@ -51,6 +46,3 @@ jobs:
           TF_VAR_agent_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
-
-      - name: "Use Terraform Output"
-        run: echo "The captured output is: $TF_PLAN_OUTPUT"
