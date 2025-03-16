@@ -30,26 +30,27 @@ jobs:
         id: validate
         run: terraform validate -no-color
         working-directory: ./terraform
-        
+
       - name: Debug Environment Variables
-        run: env | grep TF_VAR
+        run: printenv
+
 
       - name: "Terraform Plan"
         id: plan
         run: terraform plan -no-color
         working-directory: ./terraform
         env:
-          TF_VAR_agent_client_id: ${{ secrets.AZURE_CLIENT_ID }}
-          TF_VAR_agent_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+          TF_VAR_AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          TF_VAR_AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          TF_VAR_AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          TF_VAR_AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: "Terraform Apply"
         id: apply
         run: terraform apply -auto-approve
         working-directory: ./terraform
         env:
-          TF_VAR_agent_client_id: ${{ secrets.AZURE_CLIENT_ID }}
-          TF_VAR_agent_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+          TF_VAR_AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          TF_VAR_AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          TF_VAR_AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          TF_VAR_AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
