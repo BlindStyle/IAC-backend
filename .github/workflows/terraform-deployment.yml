@@ -30,6 +30,9 @@ jobs:
         id: validate
         run: terraform validate -no-color
         working-directory: ./terraform
+        
+      - name: Debug Environment Variables
+        run: env | grep TF_VAR
 
       - name: "Terraform Plan"
         id: plan
