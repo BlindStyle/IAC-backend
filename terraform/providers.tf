@@ -25,7 +25,6 @@ provider "azurerm" {
   tenant_id       = var.AZURE_TENANT_ID
   subscription_id = var.AZURE_SUBSCRIPTION_ID
 
-  use_msi = false # This forces Terraform to use the Service Principal instead of Managed Identity
 }
 
 
