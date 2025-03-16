@@ -30,11 +30,7 @@ jobs:
         id: validate
         run: terraform validate -no-color
         working-directory: ./terraform
-
-      - name: Debug Environment Variables
-        run: printenv
-
-
+        
       - name: "Terraform Plan"
         id: plan
         run: terraform plan -no-color
