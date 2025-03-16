@@ -97,10 +97,11 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
   network_interface_ids = [azurerm_network_interface.my_terraform_nic.id]
   size                  = "Standard_DS1_v2"
 
-  admin_ssh_key {
-    username   = "azureuser"
-    public_key = file("~/.ssh/id_rsa.pub") # or var.ssh_public_key
-  }
+  # Enable password authentication
+  disable_password_authentication = false
+
+  admin_username = var.username
+  admin_password = var.admin_password
 
   os_disk {
     name                 = "myOsDisk"
@@ -115,8 +116,7 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
     version   = "latest"
   }
 
-  computer_name  = "hostname"
-  admin_username = var.username
+  computer_name = "hostname"
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.my_storage_account.primary_blob_endpoint

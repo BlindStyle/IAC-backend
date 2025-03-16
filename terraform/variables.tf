@@ -36,7 +36,7 @@ variable "AZURE_SUBSCRIPTION_ID" {
   type        = string
 }
 
-variable "ssh_public_key" {
-  description = "SSH Public Key for VM Access"
+variable "admin_password" {
+  description = "admin password"
   type        = string
 }
